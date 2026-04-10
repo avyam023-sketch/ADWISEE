@@ -1,0 +1,11 @@
+# Local / editor
+.cursor/
+.vscode/
+*.log
+
+# OS
+Thumbs.db
+Desktop.ini
+
+# Optional: uncomment to keep the deck out of the repo (smaller clone)
+# *.pptx

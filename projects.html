@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ongoing projects — Adwise Studios</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #2e2d7c;
+    --pink: #e8186d;
+    --beige: #f0e6d3;
+    --off: #fafafa;
+    --scroll-total: 0;
+  }
+  html {
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(46,45,124,0.15) transparent;
+  }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--off);
+    color: #222;
+    min-height: 100vh;
+    padding-top: 76px;
+    overflow-x: hidden;
+  }
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.028;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 200px 200px;
+  }
+  .scroll-progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 2px;
+    width: 100%;
+    background: linear-gradient(90deg, var(--navy), var(--pink));
+    z-index: 102;
+    transform-origin: left;
+    transform: scaleX(var(--scroll-total, 0));
+    pointer-events: none;
+  }
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 22px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255,255,255,0.88);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(46,45,124,0.05);
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+                background 0.3s ease;
+  }
+  nav.nav-hidden { transform: translateY(-100%); }
+  nav.nav-scrolled { background: rgba(255,255,255,0.95); }
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 0.08em;
+    color: var(--navy);
+  }
+  .nav-links {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp(16px, 2vw, 28px);
+    align-items: center;
+  }
+  .nav-links a {
+    text-decoration: none;
+    color: #555;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    transition: color 0.25s;
+    position: relative;
+  }
+  .nav-links a:not(.nav-cta)::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--navy);
+    transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .nav-links a:not(.nav-cta):hover::after { width: 100%; }
+  .nav-links a:not(.nav-cta):hover { color: var(--navy); }
+  .nav-links a.nav-cta {
+    background: var(--navy);
+    color: #fff !important;
+    padding: 10px 24px;
+    border-radius: 100px;
+    transition: background 0.3s, transform 0.25s;
+  }
+  .nav-links a.nav-cta:hover { background: var(--pink); transform: translateY(-2px); }
+  .nav-links a.is-active { color: var(--navy); font-weight: 600; }
+
+  .projects-hero {
+    padding: 56px 48px 48px;
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+  .projects-hero__kicker {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--navy);
+    opacity: 0.85;
+    margin-bottom: 12px;
+  }
+  .projects-hero__title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.8rem, 6vw, 4.2rem);
+    line-height: 1.05;
+    color: #111;
+    letter-spacing: 0.02em;
+    margin: 0;
+  }
+  .projects-hero__title em {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    color: var(--navy);
+    font-weight: 400;
+  }
+  .reveal-lines .line {
+    display: block;
+    overflow: hidden;
+    padding-bottom: 4px;
+  }
+  .reveal-lines .line-inner {
+    display: block;
+    transform: translateY(110%);
+    transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal-lines.visible .line-inner {
+    transform: translateY(0);
+  }
+  .reveal-lines .line:nth-child(1) .line-inner { transition-delay: 0s; }
+  .reveal-lines .line:nth-child(2) .line-inner { transition-delay: 0.1s; }
+  .reveal-lines .line:nth-child(3) .line-inner { transition-delay: 0.2s; }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: calc(var(--d, 0) * 0.12s);
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .projects-wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 48px 80px;
+  }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+  }
+  .project-slide {
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(46, 45, 124, 0.1);
+    box-shadow: 0 12px 36px rgba(0,0,0,0.06);
+  }
+  .project-slide--extra {
+    display: none;
+  }
+  .projects-grid.is-expanded .project-slide--extra {
+    display: block;
+  }
+  .project-slide__fig {
+    margin: 0;
+ }
+  .project-slide__fig img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  .projects-actions {
+    margin-top: 36px;
+    text-align: center;
+  }
+  .projects-see-more {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 14px 32px;
+    border-radius: 100px;
+    border: 2px solid var(--navy);
+    background: #fff;
+    color: var(--navy);
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+  .projects-see-more:hover {
+    background: var(--navy);
+    color: #fff;
+  }
+  .projects-see-more:focus-visible {
+    outline: 2px solid var(--pink);
+    outline-offset: 3px;
+  }
+  .projects-grid.is-expanded ~ .projects-actions .projects-see-more {
+    display: none;
+  }
+  .projects-done {
+    display: none;
+    margin-top: 16px;
+    font-size: 0.88rem;
+    color: #666;
+  }
+  .projects-grid.is-expanded ~ .projects-actions .projects-done {
+    display: block;
+  }
+  .projects-done.reveal {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  .projects-done.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .footer {
+    padding: 40px 48px;
+    background: #111;
+    color: rgba(255,255,255,0.75);
+    font-size: 0.85rem;
+  }
+  .footer a { color: #fff; }
+
+  .wa-float {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 1500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    padding: 0;
+    background: #25d366;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 50%;
+    box-shadow: 0 8px 28px rgba(37, 211, 102, 0.42), 0 4px 12px rgba(0,0,0,0.12);
+  }
+  .wa-float svg { width: 28px; height: 28px; display: block; }
+
+  @media (max-width: 640px) {
+    nav { padding: 14px 20px; }
+    .projects-hero, .projects-wrap { padding-left: 20px; padding-right: 20px; }
+    .nav-links { gap: 6px 14px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    .reveal,
+    .reveal-lines .line-inner {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="scroll-progress-bar"></div>
+
+<nav>
+  <a href="index.html#hero" class="nav-logo" style="text-decoration:none;color:inherit;">ADWISE STUDIOS</a>
+  <ul class="nav-links">
+    <li><a href="index.html#media">Media</a></li>
+    <li><a href="index.html#framework">ATL / BTL</a></li>
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="projects.html" class="is-active">Projects</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#clients">Clients</a></li>
+    <li><a href="index.html#process">Process</a></li>
+    <li><a href="index.html#contact" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<header class="projects-hero">
+  <p class="projects-hero__kicker reveal" style="--d:1">Ongoing work</p>
+  <h1 class="projects-hero__title reveal-lines">
+    <span class="line"><span class="line-inner">Punjab Highway —</span></span>
+    <span class="line"><span class="line-inner"><em>project deck.</em></span></span>
+  </h1>
+</header>
+
+<div class="projects-wrap">
+  <div class="projects-grid" id="projects-grid" aria-label="Project slides gallery">
+    <article class="project-slide reveal" style="--d:1">
+      <figure class="project-slide__fig">
+        <img src="assets/projects/slide-01.jpg" alt="Punjab Highway — ongoing project visual" loading="lazy" decoding="async">
+      </figure>
+    </article>
+    <article class="project-slide reveal" style="--d:2">
+      <figure class="project-slide__fig">
+        <img src="assets/projects/slide-03.jpg" alt="Punjab Highway — ongoing project visual" loading="lazy" decoding="async">
+      </figure>
+    </article>
+    <article class="project-slide reveal" style="--d:3">
+      <figure class="project-slide__fig">
+        <img src="assets/projects/slide-04.jpg" alt="Punjab Highway — ongoing project visual" loading="lazy" decoding="async">
+      </figure>
+    </article>
+    <article class="project-slide reveal" style="--d:4">
+      <figure class="project-slide__fig">
+        <img src="assets/projects/slide-05.jpg" alt="Punjab Highway — ongoing project visual" loading="lazy" decoding="async">
+      </figure>
+    </article>
+    <article class="project-slide reveal" style="--d:5">
+      <figure class="project-slide__fig">
+        <img src="assets/projects/slide-06.jpg" alt="Punjab Highway — ongoing project visual" loading="lazy" decoding="async">
+      </figure>
+    </article>
+    <article class="project-slide reveal" style="--d:6">
+      <figure class="project-slide__fig">
+        <img src="assets/projects/slide-07.jpg" alt="Punjab Highway — ongoing project visual" loading="lazy" decoding="async">
+      </figure>
+    </article>
+    <article class="project-slide reveal" style="--d:7">
+      <figure class="project-slide__fig">
+        <img src="assets/projects/slide-08.jpeg" alt="Punjab Highway — ongoing project visual" loading="lazy" decoding="async">
+      </figure>
+    </article>
+    <article class="project-slide reveal" style="--d:8">
+      <figure class="project-slide__fig">
+        <img src="assets/projects/slide-09.jpg" alt="Punjab Highway — ongoing project visual" loading="lazy" decoding="async">
+      </figure>
+    </article>
+    <article class="project-slide reveal" style="--d:1">
+      <figure class="project-slide__fig">
+        <img src="assets/projects/slide-10.jpg" alt="Punjab Highway — ongoing project visual" loading="lazy" decoding="async">
+      </figure>
+    </article>
+    <article class="project-slide reveal" style="--d:2">
+      <figure class="project-slide__fig">
+        <img src="assets/projects/slide-11.jpg" alt="Punjab Highway — ongoing project visual" loading="lazy" decoding="async">
+      </figure>
+    </article>
+    <article class="project-slide reveal" style="--d:3">
+      <figure class="project-slide__fig">
+        <img src="assets/projects/slide-12.jpg" alt="Punjab Highway — ongoing project visual" loading="lazy" decoding="async">
+      </figure>
+    </article>
+    <article class="project-slide reveal" style="--d:4">
+      <figure class="project-slide__fig">
+        <img src="assets/projects/slide-14.jpg" alt="Punjab Highway — ongoing project visual" loading="lazy" decoding="async">
+      </figure>
+    </article>
+    <article class="project-slide reveal" style="--d:5">
+      <figure class="project-slide__fig">
+        <img src="assets/projects/slide-15.jpg" alt="Punjab Highway — ongoing project visual" loading="lazy" decoding="async">
+      </figure>
+    </article>
+    <article class="project-slide reveal" style="--d:6">
+      <figure class="project-slide__fig">
+        <img src="assets/projects/slide-17.jpg" alt="Punjab Highway — ongoing project visual" loading="lazy" decoding="async">
+      </figure>
+    </article>
+    <article class="project-slide reveal" style="--d:7">
+      <figure class="project-slide__fig">
+        <img src="assets/projects/slide-18.jpg" alt="Punjab Highway — ongoing project visual" loading="lazy" decoding="async">
+      </figure>
+    </article>
+    <article class="project-slide reveal" style="--d:8">
+      <figure class="project-slide__fig">
+        <img src="assets/projects/slide-19.jpg" alt="Punjab Highway — ongoing project visual" loading="lazy" decoding="async">
+      </figure>
+    </article>
+    <article class="project-slide reveal" style="--d:1">
+      <figure class="project-slide__fig">
+        <img src="assets/projects/slide-20.jpg" alt="Punjab Highway — ongoing project visual" loading="lazy" decoding="async">
+      </figure>
+    </article>
+    <article class="project-slide reveal" style="--d:2">
+      <figure class="project-slide__fig">
+        <img src="assets/projects/slide-21.jpg" alt="Punjab Highway — ongoing project visual" loading="lazy" decoding="async">
+      </figure>
+    </article>
+    <article class="project-slide reveal" style="--d:3">
+      <figure class="project-slide__fig">
+        <img src="assets/projects/slide-22.jpg" alt="Punjab Highway — ongoing project visual" loading="lazy" decoding="async">
+      </figure>
+    </article>
+    <article class="project-slide reveal" style="--d:4">
+      <figure class="project-slide__fig">
+        <img src="assets/projects/slide-23.jpg" alt="Punjab Highway — ongoing project visual" loading="lazy" decoding="async">
+      </figure>
+    </article>
+    <article class="project-slide reveal project-slide--extra" style="--d:5">
+      <figure class="project-slide__fig">
+        <img src="assets/projects/slide-24.jpeg" alt="Punjab Highway — ongoing project visual" loading="lazy" decoding="async">
+      </figure>
+    </article>
+    <article class="project-slide reveal project-slide--extra" style="--d:6">
+      <figure class="project-slide__fig">
+        <img src="assets/projects/slide-25.jpg" alt="Punjab Highway — ongoing project visual" loading="lazy" decoding="async">
+      </figure>
+    </article>
+    <article class="project-slide reveal project-slide--extra" style="--d:7">
+      <figure class="project-slide__fig">
+        <img src="assets/projects/slide-26.jpg" alt="Punjab Highway — ongoing project visual" loading="lazy" decoding="async">
+      </figure>
+    </article>
+    <article class="project-slide reveal project-slide--extra" style="--d:8">
+      <figure class="project-slide__fig">
+        <img src="assets/projects/slide-28.jpg" alt="Punjab Highway — ongoing project visual" loading="lazy" decoding="async">
+      </figure>
+    </article>
+    <article class="project-slide reveal project-slide--extra" style="--d:1">
+      <figure class="project-slide__fig">
+        <img src="assets/projects/slide-29.jpg" alt="Punjab Highway — ongoing project visual" loading="lazy" decoding="async">
+      </figure>
+    </article>
+    <article class="project-slide reveal project-slide--extra" style="--d:2">
+      <figure class="project-slide__fig">
+        <img src="assets/projects/slide-30.jpg" alt="Punjab Highway — ongoing project visual" loading="lazy" decoding="async">
+      </figure>
+    </article>
+  </div>
+  <div class="projects-actions">
+    <button type="button" class="projects-see-more reveal" style="--d:2" id="projects-see-more">See more?</button>
+    <p class="projects-done reveal" id="projects-done" style="--d:1">Showing all <strong>26</strong> project images on this page.</p>
+  </div>
+</div>
+
+<footer class="footer">
+  <p class="reveal" style="--d:2"><a href="index.html">← Back to home</a> · © 2014–2026 Adwise Studio</p>
+</footer>
+
+<a class="wa-float" href="https://wa.me/919888460280" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp +91 98884 60280">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+(function () {
+  'use strict';
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+
+  var nav = document.querySelector('nav');
+  var lastScrollY = 0;
+  var ticking = false;
+  function updateNav() {
+    var currentY = window.scrollY;
+    if (nav) {
+      if (currentY > lastScrollY && currentY > 100) {
+        nav.classList.add('nav-hidden');
+      } else {
+        nav.classList.remove('nav-hidden');
+      }
+      if (currentY > 50) {
+        nav.classList.add('nav-scrolled');
+      } else {
+        nav.classList.remove('nav-scrolled');
+      }
+    }
+    lastScrollY = currentY;
+    ticking = false;
+  }
+  window.addEventListener('scroll', function () {
+    if (!ticking) {
+      requestAnimationFrame(updateNav);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  function updateScrollProgress() {
+    var scrollTop = window.scrollY;
+    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    var progress = docHeight > 0 ? scrollTop / docHeight : 0;
+    document.documentElement.style.setProperty('--scroll-total', progress);
+  }
+  window.addEventListener('scroll', updateScrollProgress, { passive: true });
+  updateScrollProgress();
+
+  var revealObserver = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal, .reveal-lines').forEach(function (el) {
+    revealObserver.observe(el);
+  });
+
+  var grid = document.getElementById('projects-grid');
+  var btn = document.getElementById('projects-see-more');
+  var done = document.getElementById('projects-done');
+  if (btn && grid) {
+    btn.setAttribute('aria-expanded', 'false');
+    btn.setAttribute('aria-controls', 'projects-grid');
+    btn.addEventListener('click', function () {
+      grid.classList.add('is-expanded');
+      btn.setAttribute('aria-expanded', 'true');
+      var extras = grid.querySelectorAll('.project-slide--extra.reveal');
+      extras.forEach(function (el, i) {
+        el.classList.remove('visible');
+      });
+      requestAnimationFrame(function () {
+        extras.forEach(function (el, i) {
+          setTimeout(function () { el.classList.add('visible'); }, 40 + i * 45);
+        });
+      });
+      if (done) {
+        setTimeout(function () { done.classList.add('visible'); }, 120);
+      }
+    });
+  }
+})();
+</script>
+</body>
+</html>

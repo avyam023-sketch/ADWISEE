@@ -1,0 +1,152 @@
+[
+  {
+    "n": 1,
+    "file": "slide-01.jpg",
+    "slide": "slide1.xml"
+  },
+  {
+    "n": 2,
+    "file": null,
+    "slide": "slide2.xml"
+  },
+  {
+    "n": 3,
+    "file": "slide-03.jpg",
+    "slide": "slide3.xml"
+  },
+  {
+    "n": 4,
+    "file": "slide-04.jpg",
+    "slide": "slide4.xml"
+  },
+  {
+    "n": 5,
+    "file": "slide-05.jpg",
+    "slide": "slide5.xml"
+  },
+  {
+    "n": 6,
+    "file": "slide-06.jpg",
+    "slide": "slide6.xml"
+  },
+  {
+    "n": 7,
+    "file": "slide-07.jpg",
+    "slide": "slide7.xml"
+  },
+  {
+    "n": 8,
+    "file": "slide-08.jpeg",
+    "slide": "slide8.xml"
+  },
+  {
+    "n": 9,
+    "file": "slide-09.jpg",
+    "slide": "slide9.xml"
+  },
+  {
+    "n": 10,
+    "file": "slide-10.jpg",
+    "slide": "slide10.xml"
+  },
+  {
+    "n": 11,
+    "file": "slide-11.jpg",
+    "slide": "slide11.xml"
+  },
+  {
+    "n": 12,
+    "file": "slide-12.jpg",
+    "slide": "slide12.xml"
+  },
+  {
+    "n": 13,
+    "file": null,
+    "slide": "slide13.xml"
+  },
+  {
+    "n": 14,
+    "file": "slide-14.jpg",
+    "slide": "slide14.xml"
+  },
+  {
+    "n": 15,
+    "file": "slide-15.jpg",
+    "slide": "slide15.xml"
+  },
+  {
+    "n": 16,
+    "file": null,
+    "slide": "slide16.xml"
+  },
+  {
+    "n": 17,
+    "file": "slide-17.jpg",
+    "slide": "slide17.xml"
+  },
+  {
+    "n": 18,
+    "file": "slide-18.jpg",
+    "slide": "slide18.xml"
+  },
+  {
+    "n": 19,
+    "file": "slide-19.jpg",
+    "slide": "slide19.xml"
+  },
+  {
+    "n": 20,
+    "file": "slide-20.jpg",
+    "slide": "slide20.xml"
+  },
+  {
+    "n": 21,
+    "file": "slide-21.jpg",
+    "slide": "slide21.xml"
+  },
+  {
+    "n": 22,
+    "file": "slide-22.jpg",
+    "slide": "slide22.xml"
+  },
+  {
+    "n": 23,
+    "file": "slide-23.jpg",
+    "slide": "slide23.xml"
+  },
+  {
+    "n": 24,
+    "file": "slide-24.jpeg",
+    "slide": "slide24.xml"
+  },
+  {
+    "n": 25,
+    "file": "slide-25.jpg",
+    "slide": "slide25.xml"
+  },
+  {
+    "n": 26,
+    "file": "slide-26.jpg",
+    "slide": "slide26.xml"
+  },
+  {
+    "n": 27,
+    "file": null,
+    "slide": "slide27.xml"
+  },
+  {
+    "n": 28,
+    "file": "slide-28.jpg",
+    "slide": "slide28.xml"
+  },
+  {
+    "n": 29,
+    "file": "slide-29.jpg",
+    "slide": "slide29.xml"
+  },
+  {
+    "n": 30,
+    "file": "slide-30.jpg",
+    "slide": "slide30.xml"
+  }
+]
