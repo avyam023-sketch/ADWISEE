@@ -1519,65 +1519,50 @@
   }
   .pdf-process-scroll {
     margin-top: 44px;
-    overflow-x: auto;
-    overflow-y: visible;
-    padding: 12px 8px 20px;
-    margin-left: -8px;
-    margin-right: -8px;
-    -webkit-overflow-scrolling: touch;
-    scroll-snap-type: x proximity;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(46, 45, 124, 0.28) transparent;
-    mask-image: linear-gradient(90deg, transparent 0%, #000 2%, #000 98%, transparent 100%);
-  }
-  .pdf-process-scroll::-webkit-scrollbar {
-    height: 7px;
-  }
-  .pdf-process-scroll::-webkit-scrollbar-thumb {
-    background: rgba(46, 45, 124, 0.22);
-    border-radius: 10px;
+    overflow: visible;
+    padding: 0;
+    margin-left: 0;
+    margin-right: 0;
   }
   .pdf-process {
-    display: flex;
-    flex-wrap: nowrap;
-    gap: 12px;
-    justify-content: flex-start;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(124px, 1fr));
+    gap: 10px 12px;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0;
     align-items: stretch;
-    margin-top: 0;
-    margin-left: auto;
-    margin-right: auto;
-    width: max-content;
-    padding: 2px 4px 6px;
   }
   .pdf-process-step {
-    flex: 0 0 auto;
-    min-width: 128px;
-    max-width: 150px;
-    scroll-snap-align: start;
+    min-width: 0;
     text-align: center;
-    padding: 18px 14px;
-    border-radius: 16px;
+    padding: 16px 12px;
+    border-radius: 14px;
     background: #fff;
     border: 1px solid rgba(46, 45, 124, 0.12);
-    font-size: 0.68rem;
+    font-size: 0.65rem;
     font-weight: 600;
     letter-spacing: 0.05em;
     color: var(--navy);
     text-transform: uppercase;
     line-height: 1.35;
     box-shadow: 0 4px 14px rgba(23, 23, 82, 0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .pdf-band--beige .pdf-process-step {
     background: #fff;
   }
-  /* Must beat .pdf-band--beige .pdf-process-step so “Innovation” is not white-on-cream */
+  /* Innovation: same footprint as other steps — ring accent, no glow */
   .pdf-band--beige .pdf-process-step--core,
   .pdf-process-step.pdf-process-step--core {
-    background: var(--navy);
-    color: #fff;
-    border-color: var(--navy);
-    box-shadow: 0 14px 36px rgba(46, 45, 124, 0.35);
-    animation: processCoreGlow 3.2s ease-in-out infinite;
+    background: #fff;
+    color: var(--navy);
+    border: 2px solid var(--navy);
+    box-shadow: 0 4px 14px rgba(23, 23, 82, 0.08);
+    padding: 15px 11px;
   }
   .contact-block { margin-top: 48px; text-align: center; max-width: 640px; margin-left: auto; margin-right: auto; }
   .contact-block p, .contact-block address {
@@ -1913,15 +1898,6 @@
     to { opacity: 0.6; }
   }
 
-  @keyframes processCoreGlow {
-    0%, 100% {
-      box-shadow: 0 14px 36px rgba(46, 45, 124, 0.35);
-    }
-    50% {
-      box-shadow: 0 16px 42px rgba(232, 24, 109, 0.28), 0 14px 36px rgba(46, 45, 124, 0.3);
-    }
-  }
-
   /* ═══════════════════════════════════════════
      RESPONSIVE
      ═══════════════════════════════════════════ */
@@ -1960,15 +1936,16 @@
     .pdf-band {
       padding: 80px 24px 100px;
     }
-    .pdf-process-scroll {
-      margin-left: -4px;
-      margin-right: -4px;
-      mask-image: none;
+    .pdf-process {
+      grid-template-columns: repeat(auto-fill, minmax(108px, 1fr));
+      gap: 8px 10px;
     }
     .pdf-process-step {
-      min-width: 112px;
-      max-width: none;
-      flex: 0 0 auto;
+      font-size: 0.62rem;
+      padding: 14px 10px;
+    }
+    .pdf-process-step.pdf-process-step--core {
+      padding: 13px 9px;
     }
     .pdf-mosaic {
       grid-template-columns: 1fr;
@@ -2123,11 +2100,6 @@
 
     .story-rail--flash .story-rail__num,
     .story-rail--flash .story-rail__title {
-      animation: none;
-    }
-
-    .pdf-band--beige .pdf-process-step--core,
-    .pdf-process-step.pdf-process-step--core {
       animation: none;
     }
 
@@ -2702,7 +2674,7 @@
     <p class="pdf-band__kicker reveal">Operations</p>
     <h2 class="pdf-band__title reveal" style="--d:1">How we <em>execute.</em></h2>
     <p class="pdf-band__lead reveal" style="--d:2">A connected workflow from brief to post-campaign learning — with innovation at the centre.</p>
-    <div class="pdf-process-scroll reveal" style="--d:3" role="region" aria-label="Execution workflow — scroll horizontally on small screens">
+    <div class="pdf-process-scroll reveal" style="--d:3" role="region" aria-label="Execution workflow — all steps">
       <div class="pdf-process">
         <div class="pdf-process-step">Analysis &amp; finance</div>
         <div class="pdf-process-step">Client servicing / SPOC</div>
@@ -2727,7 +2699,7 @@
       <span class="line"><span class="line-inner"><em>REMARKABLE.</em></span></span>
     </h2>
     <a href="mailto:raghav.map89@gmail.com" class="cta-btn reveal" style="--d:4">
-      <span class="cta-btn-text">e-mail us</span>
+      <span class="cta-btn-text">E-mail Us</span>
       <span class="cta-btn-arrow">→</span>
     </a>
     <div class="contact-block reveal" style="--d:5">
